@@ -1,32 +1,41 @@
-export type Reservation = {
-  id: string;
-  customerName: string;
-  menu: string;
-  datetime: string;
-  status: "確定" | "未確定" | "キャンセル";
-};
+import type { Reservation } from "../types/reservation";
 
+// 予約のダミーデータ(5件)
 const dummyReservations: Reservation[] = [
   {
     id: "1",
     customerName: "田中 美咲",
-    menu: "カット + カラー",
     datetime: "2026/07/23 10:00",
+    menu: "カット + カラー",
     status: "確定",
   },
   {
     id: "2",
     customerName: "佐藤 陽子",
-    menu: "パーマ",
     datetime: "2026/07/23 13:30",
+    menu: "パーマ",
     status: "未確定",
   },
   {
     id: "3",
     customerName: "鈴木 花",
-    menu: "トリートメント",
     datetime: "2026/07/24 11:00",
+    menu: "トリートメント",
     status: "確定",
+  },
+  {
+    id: "4",
+    customerName: "高橋 健一",
+    datetime: "2026/07/24 15:00",
+    menu: "縮毛矯正",
+    status: "未確定",
+  },
+  {
+    id: "5",
+    customerName: "伊藤 麻衣",
+    datetime: "2026/07/25 12:00",
+    menu: "ヘッドスパ",
+    status: "キャンセル",
   },
 ];
 
