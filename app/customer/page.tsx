@@ -1,4 +1,4 @@
-import FeatureLayout from "@/src/components/layout/FeatureLayout";
+import FeatureLayout from "@/components/layout/FeatureLayout";
 import CustomerList from "@/features/customer/CustomerList";
 import CustomerDetail from "@/features/customer/CustomerDetail";
 

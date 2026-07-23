@@ -1,4 +1,4 @@
-import FeatureLayout from "@/src/components/layout/FeatureLayout";
+import FeatureLayout from "@/components/layout/FeatureLayout";
 import ReservationList from "@/features/reservation/ReservationList";
 import ReservationDetail from "@/features/reservation/ReservationDetail";
 

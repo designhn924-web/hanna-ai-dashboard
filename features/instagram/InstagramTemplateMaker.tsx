@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import FeatureLayout from "@/src/components/layout/FeatureLayout";
+import FeatureLayout from "@/components/layout/FeatureLayout";
 import InstagramForm from "./InstagramForm";
 import InstagramPreview from "./InstagramPreview";
 import { templates } from "./data/templates";

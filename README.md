@@ -15,13 +15,13 @@ npm run dev
 ## フォルダ構成
 
 ```
-app/                     Next.js App Router のルーティング・ページ
-components/              複数の機能から共通で使う再利用可能なUIコンポーネント
-features/                機能単位のコード(例: instagram-template-maker)。UI・ロジックをまとめて置く
-src/components/layout/   ダッシュボード全体の骨格(ヘッダー・サイドバー・共通レイアウト)
-public/                  画像などの静的ファイル
-styles/                  グローバルスタイル(globals.css など)
-docs/                    設計・仕様に関するドキュメント
+app/                Next.js App Router のルーティング・ページ
+components/         複数の機能から共通で使う再利用可能なUIコンポーネント
+components/layout/  ダッシュボード全体の骨格(ヘッダー・サイドバー・共通レイアウト)
+features/           機能単位のコード(例: instagram)。UI・ロジックをまとめて置く
+public/             画像などの静的ファイル
+styles/             グローバルスタイル(globals.css など)
+docs/               設計・仕様に関するドキュメント
 ```
 
 新しい機能を追加するときは `features/` 配下に機能名でフォルダを作り、

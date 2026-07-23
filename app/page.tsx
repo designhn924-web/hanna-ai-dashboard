@@ -1,6 +1,6 @@
-import FeatureLayout from "@/src/components/layout/FeatureLayout";
+import FeatureLayout from "@/components/layout/FeatureLayout";
 import MenuCard from "@/components/MenuCard";
-import { navItems } from "@/src/components/layout/navItems";
+import { navItems } from "@/components/layout/navItems";
 
 export default function Home() {
   return (

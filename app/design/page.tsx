@@ -1,4 +1,4 @@
-import FeatureLayout from "@/src/components/layout/FeatureLayout";
+import FeatureLayout from "@/components/layout/FeatureLayout";
 import DesignSectionList from "@/features/design/DesignSectionList";
 import DesignPreview from "@/features/design/DesignPreview";
 
