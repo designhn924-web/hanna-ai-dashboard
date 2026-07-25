@@ -1,10 +1,6 @@
-export type SalesRecord = {
-  id: string;
-  date: string;
-  menu: string;
-  amount: number;
-};
+import type { SalesRecord } from "../types/sales";
 
+// 売上のダミーデータ
 const dummySalesRecords: SalesRecord[] = [
   { id: "1", date: "2026/07/20", menu: "カット + カラー", amount: 12000 },
   { id: "2", date: "2026/07/21", menu: "パーマ", amount: 9500 },

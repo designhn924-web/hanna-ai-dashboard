@@ -1,9 +1,6 @@
-export type SettingItem = {
-  id: string;
-  label: string;
-  description: string;
-};
+import type { SettingItem } from "../types/settings";
 
+// 設定項目のダミーデータ
 const dummySettingItems: SettingItem[] = [
   { id: "1", label: "アカウント情報", description: "サロン名・連絡先の変更" },
   { id: "2", label: "通知設定", description: "予約通知の受け取り方法" },

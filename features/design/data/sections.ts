@@ -1,9 +1,6 @@
-export type DesignSection = {
-  id: string;
-  label: string;
-  description: string;
-};
+import type { DesignSection } from "../types/design";
 
+// 編集できるサロンサイトのセクションのダミーデータ
 const dummyDesignSections: DesignSection[] = [
   { id: "1", label: "トップ", description: "サロンの紹介・メインビジュアル" },
   { id: "2", label: "メニュー", description: "施術メニューと料金の一覧" },
