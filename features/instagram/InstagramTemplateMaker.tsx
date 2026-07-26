@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import FeatureLayout from "@/components/layout/FeatureLayout";
+import PageHeader from "@/components/ui/PageHeader";
+import Section from "@/components/ui/Section";
 import InstagramForm from "./InstagramForm";
 import InstagramPreview from "./InstagramPreview";
 import { templates } from "./data/templates";
@@ -74,9 +76,12 @@ export default function InstagramTemplateMaker() {
 
   return (
     <FeatureLayout title="Instagram">
+      <PageHeader
+        title="Instagram投稿作成"
+        description="投稿内容を作成し、リアルタイムでプレビュー確認できます"
+      />
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start">
-        <section className="rounded-2xl border border-stone-200 bg-white p-8">
-          <h3 className="mb-6 text-sm font-medium text-stone-500">入力エリア</h3>
+        <Section title="入力エリア">
           <InstagramForm
             data={data}
             onChange={setData}
@@ -84,14 +89,11 @@ export default function InstagramTemplateMaker() {
             onSelectTemplate={handleSelectTemplate}
             onReset={handleReset}
           />
-        </section>
+        </Section>
 
-        <section className="rounded-2xl border border-stone-200 bg-white p-8">
-          <h3 className="mb-6 text-sm font-medium text-stone-500">
-            プレビュー・詳細エリア
-          </h3>
+        <Section title="プレビュー・詳細エリア">
           <InstagramPreview data={data} />
-        </section>
+        </Section>
       </div>
     </FeatureLayout>
   );
