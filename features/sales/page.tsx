@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import FeatureLayout from "@/components/layout/FeatureLayout";
+import PageHeader from "@/components/ui/PageHeader";
+import Section from "@/components/ui/Section";
 import SalesList from "./components/SalesList";
 import SalesDetail from "./components/SalesDetail";
 import { getSalesRecords } from "./data/sales";
@@ -24,20 +26,19 @@ export default function SalesPage() {
 
   return (
     <FeatureLayout title="Sales">
+      <PageHeader title="売上管理" description="売上の一覧・詳細を確認できます" />
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start">
-        <section className="rounded-2xl border border-stone-200 bg-white p-8">
-          <h3 className="mb-6 text-sm font-medium text-stone-500">売上一覧</h3>
+        <Section title="売上一覧">
           <SalesList
             records={records}
             selectedId={selectedId}
             onSelect={setSelectedId}
           />
-        </section>
+        </Section>
 
-        <section className="rounded-2xl border border-stone-200 bg-white p-8">
-          <h3 className="mb-6 text-sm font-medium text-stone-500">売上詳細</h3>
+        <Section title="売上詳細">
           <SalesDetail record={selectedRecord} />
-        </section>
+        </Section>
       </div>
     </FeatureLayout>
   );

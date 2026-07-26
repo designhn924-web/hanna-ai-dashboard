@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import FeatureLayout from "@/components/layout/FeatureLayout";
+import PageHeader from "@/components/ui/PageHeader";
+import Section from "@/components/ui/Section";
 import DesignSectionList from "./components/DesignSectionList";
 import DesignPreview from "./components/DesignPreview";
 import { getDesignSections } from "./data/sections";
@@ -26,24 +28,22 @@ export default function DesignPage() {
 
   return (
     <FeatureLayout title="Design">
+      <PageHeader
+        title="デザイン編集"
+        description="ページのセクションを編集し、プレビュー確認できます"
+      />
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start">
-        <section className="rounded-2xl border border-stone-200 bg-white p-8">
-          <h3 className="mb-6 text-sm font-medium text-stone-500">
-            編集メニュー一覧
-          </h3>
+        <Section title="編集メニュー一覧">
           <DesignSectionList
             sections={sections}
             selectedId={selectedId}
             onSelect={setSelectedId}
           />
-        </section>
+        </Section>
 
-        <section className="rounded-2xl border border-stone-200 bg-white p-8">
-          <h3 className="mb-6 text-sm font-medium text-stone-500">
-            プレビュー・詳細エリア
-          </h3>
+        <Section title="プレビュー・詳細エリア">
           <DesignPreview section={selectedSection} />
-        </section>
+        </Section>
       </div>
     </FeatureLayout>
   );

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import FeatureLayout from "@/components/layout/FeatureLayout";
+import PageHeader from "@/components/ui/PageHeader";
+import Section from "@/components/ui/Section";
 import SettingsList from "./components/SettingsList";
 import SettingsDetail from "./components/SettingsDetail";
 import { getSettingItems } from "./data/settings";
@@ -24,24 +26,19 @@ export default function SettingsPage() {
 
   return (
     <FeatureLayout title="Settings">
+      <PageHeader title="設定" description="各種設定項目を確認・編集できます" />
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start">
-        <section className="rounded-2xl border border-stone-200 bg-white p-8">
-          <h3 className="mb-6 text-sm font-medium text-stone-500">
-            設定項目一覧
-          </h3>
+        <Section title="設定項目一覧">
           <SettingsList
             items={items}
             selectedId={selectedId}
             onSelect={setSelectedId}
           />
-        </section>
+        </Section>
 
-        <section className="rounded-2xl border border-stone-200 bg-white p-8">
-          <h3 className="mb-6 text-sm font-medium text-stone-500">
-            設定詳細
-          </h3>
+        <Section title="設定詳細">
           <SettingsDetail item={selectedItem} />
-        </section>
+        </Section>
       </div>
     </FeatureLayout>
   );

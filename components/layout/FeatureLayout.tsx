@@ -22,9 +22,6 @@ export default function FeatureLayout({ title, children }: FeatureLayoutProps) {
         <DashboardSidebar />
 
         <main className="flex-1 bg-stone-50 p-6 sm:p-10">
-          <h2 className="mb-8 font-serif text-2xl text-stone-800 sm:text-3xl">
-            {title}
-          </h2>
           {children}
         </main>
       </div>
