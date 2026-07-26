@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import FeatureLayout from "@/components/layout/FeatureLayout";
+import PageHeader from "@/components/ui/PageHeader";
+import Section from "@/components/ui/Section";
 import CustomerList from "./components/CustomerList";
 import CustomerDetail from "./components/CustomerDetail";
 import { getCustomers } from "./data/customers";
@@ -26,22 +28,22 @@ export default function CustomerPage() {
 
   return (
     <FeatureLayout title="Customer">
+      <PageHeader
+        title="顧客管理"
+        description="お客様情報と施術履歴を管理します"
+      />
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start">
-        <section className="rounded-2xl border border-stone-200 bg-white p-8">
-          <h3 className="mb-6 text-sm font-medium text-stone-500">顧客一覧</h3>
+        <Section title="顧客一覧">
           <CustomerList
             customers={customers}
             selectedId={selectedId}
             onSelect={setSelectedId}
           />
-        </section>
+        </Section>
 
-        <section className="rounded-2xl border border-stone-200 bg-white p-8">
-          <h3 className="mb-6 text-sm font-medium text-stone-500">
-            顧客カルテ
-          </h3>
+        <Section title="顧客カルテ">
           <CustomerDetail customer={selectedCustomer} />
-        </section>
+        </Section>
       </div>
     </FeatureLayout>
   );
