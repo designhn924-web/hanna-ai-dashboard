@@ -1,3 +1,4 @@
+import Badge from "@/components/ui/Badge";
 import Card from "@/components/ui/Card";
 import type { Customer } from "../types/customer";
 
@@ -49,9 +50,11 @@ export default function CustomerDetail({ customer }: CustomerDetailProps) {
 
     <div>
       <dt className="text-stone-400">会員ランク</dt>
-      <dd className="mt-1 text-stone-800">
-        {customer.rank}
-      </dd>
+      <dd className="mt-1">
+  <Badge tone="accent">
+    {customer.rank}
+  </Badge>
+</dd>
     </div>
 
     <div>
