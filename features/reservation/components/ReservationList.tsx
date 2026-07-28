@@ -1,7 +1,7 @@
 "use client";
 
 import type { Reservation } from "../types/reservation";
-
+import EmptyState from "@/components/ui/EmptyState";
 type ReservationListProps = {
   reservations: Reservation[];
   // 今選ばれている予約のID
@@ -29,6 +29,16 @@ export default function ReservationList({
   selectedId,
   onSelect,
 }: ReservationListProps) {
+  
+  if (reservations.length === 0) {
+    return (
+      <EmptyState
+        title="予約データがありません"
+        description="新しい予約を登録すると、ここに表示されます。"
+      />
+    );
+  }
+
   return (
     <ul className="flex flex-col gap-3">
       {reservations.map((reservation) => {

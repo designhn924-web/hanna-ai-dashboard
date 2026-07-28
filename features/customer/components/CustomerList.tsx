@@ -1,7 +1,7 @@
 "use client";
 
 import type { Customer } from "../types/customer";
-
+import EmptyState from "@/components/ui/EmptyState";
 type CustomerListProps = {
   customers: Customer[];
   // 今選ばれている顧客のID
@@ -28,6 +28,15 @@ export default function CustomerList({
   selectedId,
   onSelect,
 }: CustomerListProps) {
+  
+  if (customers.length === 0) {
+    return (
+      <EmptyState
+        title="顧客データがありません"
+        description="新しい顧客を登録すると、ここに表示されます。"
+      />
+    );
+  }
   return (
     <ul className="flex flex-col gap-3">
       {customers.map((customer) => {
