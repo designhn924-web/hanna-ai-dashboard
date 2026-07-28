@@ -8,6 +8,7 @@ const dummyReservations: Reservation[] = [
     datetime: "2026/07/23 10:00",
     menu: "カット + カラー",
     status: "確定",
+    memo: "頭皮が敏感。パッチテスト必須。",
   },
   {
     id: "2",
@@ -15,6 +16,7 @@ const dummyReservations: Reservation[] = [
     datetime: "2026/07/23 13:30",
     menu: "パーマ",
     status: "未確定",
+    memo: "明るめのカラーを好む。",
   },
   {
     id: "3",
@@ -22,6 +24,7 @@ const dummyReservations: Reservation[] = [
     datetime: "2026/07/24 11:00",
     menu: "トリートメント",
     status: "確定",
+    memo: "次回はトリートメント希望。",
   },
   {
     id: "4",
@@ -29,6 +32,7 @@ const dummyReservations: Reservation[] = [
     datetime: "2026/07/24 15:00",
     menu: "縮毛矯正",
     status: "未確定",
+    memo: "施術中は静かに過ごしたいタイプ。",
   },
   {
     id: "5",
@@ -36,6 +40,7 @@ const dummyReservations: Reservation[] = [
     datetime: "2026/07/25 12:00",
     menu: "ヘッドスパ",
     status: "キャンセル",
+    memo: "香りの強いトリートメント剤はNG。",
   },
 ];
 

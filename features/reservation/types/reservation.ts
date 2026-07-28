@@ -5,4 +5,5 @@ export type Reservation = {
   datetime: string; // 日時
   menu: string; // メニュー
   status: "確定" | "未確定" | "キャンセル"; // ステータス
+  memo: string; // メモ
 };
