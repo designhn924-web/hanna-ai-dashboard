@@ -3,7 +3,7 @@
 import InputField from "@/components/InputField";
 import TextAreaField from "@/components/TextAreaField";
 import SelectField from "@/components/SelectField";
-import PrimaryButton from "@/components/PrimaryButton";
+import PrimaryButton from "@/components/ui/PrimaryButton";
 import { templateOptions } from "./data/templates";
 import { categoryOptions, type InstagramTemplateData } from "./types";
 
