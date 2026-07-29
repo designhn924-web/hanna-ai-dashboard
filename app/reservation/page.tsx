@@ -21,7 +21,7 @@ export default function ReservationPage() {
   );
 
   return (
-    <FeatureLayout title="Reservation">
+    <FeatureLayout>
       <PageHeader title="予約管理" description="来店予定と予約情報を管理します" />
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start">
         <Section title="予約一覧">

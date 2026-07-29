@@ -25,7 +25,7 @@ export default function SettingsPage() {
   const selectedItem = items.find((item) => item.id === selectedId);
 
   return (
-    <FeatureLayout title="Settings">
+    <FeatureLayout>
       <PageHeader title="設定" description="各種設定項目を確認・編集できます" />
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start">
         <Section title="設定項目一覧">

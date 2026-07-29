@@ -75,7 +75,7 @@ export default function InstagramTemplateMaker() {
   };
 
   return (
-    <FeatureLayout title="Instagram">
+    <FeatureLayout>
       <PageHeader
         title="Instagram投稿作成"
         description="投稿内容を作成し、リアルタイムでプレビュー確認できます"

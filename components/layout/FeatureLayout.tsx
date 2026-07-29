@@ -4,8 +4,6 @@ import DashboardHeader from "./DashboardHeader";
 import DashboardSidebar from "./DashboardSidebar";
 
 type FeatureLayoutProps = {
-  // ページの見出し(例: "Instagram"、"予約")
-  title: string;
   // Main(Sidebarの右側)に表示する中身。
   // 各ページ側で Left Panel / Right Panel の2カラムを組み立てて渡す。
   children: ReactNode;
@@ -13,7 +11,8 @@ type FeatureLayoutProps = {
 
 // ダッシュボードの各機能ページで共通して使うレイアウト。
 // 構成: Header(全ページ共通) → Sidebar + Main という並び。
-export default function FeatureLayout({ title, children }: FeatureLayoutProps) {
+// ページタイトルの表示は PageHeader が担当するため、ここでは扱わない。
+export default function FeatureLayout({ children }: FeatureLayoutProps) {
   return (
     <div className="flex min-h-screen flex-col">
       <DashboardHeader />

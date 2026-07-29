@@ -25,7 +25,7 @@ export default function SalesPage() {
   const selectedRecord = records.find((record) => record.id === selectedId);
 
   return (
-    <FeatureLayout title="Sales">
+    <FeatureLayout>
       <PageHeader title="売上管理" description="売上の一覧・詳細を確認できます" />
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start">
         <Section title="売上一覧">

@@ -27,7 +27,7 @@ export default function DesignPage() {
   );
 
   return (
-    <FeatureLayout title="Design">
+    <FeatureLayout>
       <PageHeader
         title="デザイン編集"
         description="ページのセクションを編集し、プレビュー確認できます"

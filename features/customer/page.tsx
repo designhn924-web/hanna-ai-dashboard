@@ -27,7 +27,7 @@ export default function CustomerPage() {
   );
 
   return (
-    <FeatureLayout title="Customer">
+    <FeatureLayout>
       <PageHeader
         title="顧客管理"
         description="お客様情報と施術履歴を管理します"

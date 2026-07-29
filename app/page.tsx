@@ -6,7 +6,7 @@ import { navItems } from "@/components/layout/navItems";
 
 export default function Home() {
   return (
-    <FeatureLayout title="Dashboard">
+    <FeatureLayout>
       <PageHeader
         title="HanNa Dashboard"
         description="美容サロンHanNaの業務を管理するAI Dashboardです。"
