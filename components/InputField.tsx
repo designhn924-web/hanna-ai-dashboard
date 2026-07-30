@@ -1,10 +1,14 @@
 "use client";
 
+import { useId } from "react";
 type InputFieldProps = {
+  id?: string;
   label: string;
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  disabled?: boolean;
+  required?: boolean;
 };
 
 /**
@@ -13,15 +17,31 @@ type InputFieldProps = {
  * このコンポーネント自身は状態(useState)を持たない。
  */
 export default function InputField({
+  id,
   label,
   value,
   onChange,
   placeholder,
+  disabled,
+  required,
 }: InputFieldProps) {
+  const generatedId = useId();
+
+  const inputId = id ?? generatedId;
+
   return (
-    <label className="flex flex-col gap-2">
-      <span className="text-sm font-medium text-stone-700">{label}</span>
-      <input
+    <div className="flex flex-col gap-2">
+  <label
+  htmlFor={inputId}
+  className="text-sm font-medium text-stone-700"
+>
+    {label}
+  </label>
+  
+  <input
+  id={inputId}
+      disabled={disabled}
+      required={required}
         type="text"
         value={value}
         // 入力されるたびに、新しい値を親コンポーネントに伝える
@@ -29,6 +49,6 @@ export default function InputField({
         placeholder={placeholder}
         className="rounded-lg border border-stone-300 bg-white px-4 py-2 text-stone-800 outline-none transition-colors focus:border-amber-400"
       />
-    </label>
+   </div>
   );
 }
