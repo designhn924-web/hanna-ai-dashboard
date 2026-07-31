@@ -10,6 +10,7 @@ type RHFInputFieldProps = {
   placeholder?: string;
   disabled?: boolean;
   required?: boolean;
+  errorMessage?: string;
 };
 
 export default function RHFInputField({
@@ -18,6 +19,7 @@ export default function RHFInputField({
   placeholder,
   disabled,
   required,
+  errorMessage,
 }: RHFInputFieldProps) {
   const generatedId = useId();
 
@@ -25,6 +27,7 @@ export default function RHFInputField({
     <FormField
       label={label}
       required={required}
+      errorMessage={errorMessage}
     >
       <input
         id={generatedId}

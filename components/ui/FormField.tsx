@@ -10,6 +10,8 @@ type FormFieldProps = {
   description?: string;
   // trueのときだけ「※必須」を表示する
   required?: boolean;
+  // 入力欄の下に赤字で表示するエラーメッセージ(任意)
+  errorMessage?: string;
 };
 
 /**
@@ -29,6 +31,7 @@ export default function FormField({
   children,
   description,
   required = false,
+  errorMessage,
 }: FormFieldProps) {
   return (
     // flex-col + gap で「ラベル → 入力欄 → 説明」を縦並びに、
@@ -42,6 +45,9 @@ export default function FormField({
 
       {/* input や select など、外から渡された中身をそのまま表示 */}
       {children}
+
+      {/* errorMessageが渡されたときだけ、赤字でエラーを表示 */}
+      {errorMessage && <p className="text-sm text-red-500">{errorMessage}</p>}
 
       {/* descriptionが渡されたときだけ、小さい文字で補足を表示 */}
       {description && <p className="text-xs text-stone-500">{description}</p>}
