@@ -1,18 +1,21 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import RHFInputField from "@/components/RHFInputField";
-
-type PracticeFormData = {
-  name: string;
-};
+import {
+  practiceSchema,
+  type PracticeFormData,
+} from "./practiceSchema";
 
 export default function PracticeForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<PracticeFormData>();
+  } = useForm<PracticeFormData>({
+    resolver: zodResolver(practiceSchema),
+  });
 
   const onSubmit = (data: PracticeFormData) => {
     console.log(data);
@@ -22,13 +25,7 @@ export default function PracticeForm() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <RHFInputField
         label="お名前"
-        registration={register("name", {
-          required: "お名前は必須です",
-          minLength: {
-            value: 3,
-            message: "3文字以上入力してください",
-          },
-        })}
+        registration={register("name")}
         placeholder="HanNa 太郎"
         required
         errorMessage={errors.name?.message}
