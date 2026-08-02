@@ -1,6 +1,6 @@
 "use client";
 
-import type { Reservation } from "../types/reservation";
+import type { Reservation } from "@/types/reservation";
 import EmptyState from "@/components/ui/EmptyState";
 type ReservationListProps = {
   reservations: Reservation[];
