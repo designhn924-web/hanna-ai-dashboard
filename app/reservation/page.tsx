@@ -1,5 +1,6 @@
 "use client";
 
+import ReservationForm from "@/features/reservation/components/ReservationForm";
 import { useState } from "react";
 import FeatureLayout from "@/components/layout/FeatureLayout";
 import PageHeader from "@/components/ui/PageHeader";
@@ -34,6 +35,10 @@ export default function ReservationPage() {
 
         <Section title="予約詳細">
           <ReservationDetail reservation={selectedReservation} />
+        </Section>
+
+        <Section title="予約フォーム">
+          <ReservationForm />
         </Section>
       </div>
     </FeatureLayout>
