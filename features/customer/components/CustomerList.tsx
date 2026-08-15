@@ -1,6 +1,6 @@
 "use client";
 
-import type { Customer } from "../types/customer";
+import type { Customer } from "@/types/customer";
 import EmptyState from "@/components/ui/EmptyState";
 type CustomerListProps = {
   customers: Customer[];
@@ -8,12 +8,6 @@ type CustomerListProps = {
   selectedId: string;
   // 顧客がクリックされたときに呼ばれる関数(親コンポーネントに選んだIDを伝える)
   onSelect: (id: string) => void;
-};
-
-// 会員ランクごとのバッジの色分け
-const rankStyle: Record<Customer["rank"], string> = {
-  VIP: "bg-amber-50 text-amber-700",
-  通常: "bg-stone-100 text-stone-500",
 };
 
 /**
@@ -58,14 +52,9 @@ export default function CustomerList({
                   {customer.name}
                 </p>
                 <p className="text-xs text-stone-500">
-                  最終来店: {customer.lastVisit}
+                  登録日: {customer.createdAt}
                 </p>
               </div>
-              <span
-                className={`rounded-full px-3 py-1 text-xs font-medium ${rankStyle[customer.rank]}`}
-              >
-                {customer.rank}
-              </span>
             </button>
           </li>
         );
