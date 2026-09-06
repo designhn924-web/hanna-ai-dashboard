@@ -8,6 +8,7 @@ type RHFInputFieldProps = {
   label: string;
   registration: UseFormRegisterReturn;
   placeholder?: string;
+  type?: string;
   disabled?: boolean;
   required?: boolean;
   errorMessage?: string;
@@ -17,6 +18,7 @@ export default function RHFInputField({
   label,
   registration,
   placeholder,
+  type = "text",
   disabled,
   required,
   errorMessage,
@@ -32,6 +34,7 @@ export default function RHFInputField({
       <input
         id={generatedId}
         {...registration}
+        type={type}
         placeholder={placeholder}
         disabled={disabled}
         required={required}
