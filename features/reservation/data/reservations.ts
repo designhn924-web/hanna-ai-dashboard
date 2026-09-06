@@ -44,3 +44,24 @@ export async function insertReservation(
 
   return mapReservationRow(row);
 }
+
+// 予約のstatusのみをSupabaseへUPDATEし、更新後の行をReservation型で返す。
+// status以外のカラムはUPDATEペイロードに含めない。
+export async function updateReservationStatus(
+  id: string,
+  status: Reservation["status"],
+): Promise<Reservation> {
+  const { data: row, error } = await supabase
+    .from("reservations")
+    .update({ status })
+    .eq("id", id)
+    .select("id, customer_name, email, menu, datetime, status, memo")
+    .single()
+    .overrideTypes<ReservationRow, { merge: false }>();
+
+  if (error || !row) {
+    throw error ?? new Error("予約ステータスの更新に失敗しました");
+  }
+
+  return mapReservationRow(row);
+}

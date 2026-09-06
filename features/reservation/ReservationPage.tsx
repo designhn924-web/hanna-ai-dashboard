@@ -39,6 +39,15 @@ export default function ReservationPage() {
     setReservations((prev) => [...prev, newReservation]);
   };
 
+  // ステータスが更新されたら、一覧の対象1件だけを差し替える
+  const handleStatusChange = (updated: Reservation) => {
+    setReservations((prev) =>
+      prev.map((reservation) =>
+        reservation.id === updated.id ? updated : reservation,
+      ),
+    );
+  };
+
   return (
     <div className="flex flex-col gap-8">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start">
@@ -48,7 +57,10 @@ export default function ReservationPage() {
           onSelect={setSelectedId}
         />
 
-        <ReservationDetail reservation={selectedReservation} />
+        <ReservationDetail
+          reservation={selectedReservation}
+          onStatusChange={handleStatusChange}
+        />
       </div>
 
       <ReservationForm onCreate={handleCreateReservation} />
