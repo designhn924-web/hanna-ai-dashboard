@@ -2,6 +2,7 @@
 
 import type { Reservation } from "@/types/reservation";
 import EmptyState from "@/components/ui/EmptyState";
+import { formatReservationDateTime } from "../reservationUtils";
 type ReservationListProps = {
   reservations: Reservation[];
   // 今選ばれている予約のID
@@ -60,7 +61,7 @@ export default function ReservationList({
                   {reservation.customerName}
                 </p>
                 <p className="text-xs text-stone-500">
-                  {reservation.menu} ・ {reservation.datetime}
+                  {reservation.menu} ・ {formatReservationDateTime(reservation.datetime)}
                 </p>
               </div>
               <span
