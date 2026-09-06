@@ -33,6 +33,7 @@ type ReservationFormProps = {
         defaultValues: {
           name: "",
           email: "",
+          datetime: "",
           menu: "extension",
           note: "",
         },
@@ -73,6 +74,15 @@ type ReservationFormProps = {
 
 {errors.email && (
   <p>{errors.email.message}</p>
+)}
+
+<label>
+  予約日時
+  <input type="datetime-local" {...register("datetime")} />
+</label>
+
+{errors.datetime && (
+  <p>{errors.datetime.message}</p>
 )}
 
 <SelectField

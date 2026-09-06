@@ -7,6 +7,13 @@ export const reservationSchema = z.object({
     .string()
     .email("正しいメールアドレスを入力してください"),
 
+  datetime: z
+    .string()
+    .min(1, "予約日時を入力してください")
+    .refine((value) => !Number.isNaN(new Date(value).getTime()), {
+      message: "予約日時の形式が正しくありません",
+    }),
+
   menu: z.enum(
     ["extension", "perm", "eyebrow"],
     {

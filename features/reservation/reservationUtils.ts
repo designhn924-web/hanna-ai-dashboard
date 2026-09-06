@@ -55,7 +55,7 @@ export function createReservation(
 
   email: data.email,
 
-  datetime: new Date().toISOString(),
+  datetime: new Date(data.datetime).toISOString(),
 
   menu: getMenuLabel(data.menu),
 
