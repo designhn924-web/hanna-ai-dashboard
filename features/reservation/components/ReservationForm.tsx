@@ -1,8 +1,6 @@
 "use client";
 
-import SelectField, {
-    type SelectOption,
-  } from "@/components/ui/SelectField";
+import SelectField from "@/components/ui/SelectField";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -14,25 +12,17 @@ import { useForm } from "react-hook-form";
 
 import { useState } from "react";
 
+import type { Reservation } from "@/types/reservation";
+import { createReservation, menuOptions } from "../reservationUtils";
 
-const menuOptions: SelectOption[] = [
-    {
-      label: "まつげエクステ",
-      value: "extension",
-    },
-    {
-      label: "まつげパーマ",
-      value: "perm",
-    },
-    {
-      label: "アイブロウ",
-      value: "eyebrow",
-    },
-  ];
+type ReservationFormProps = {
+  // 新規予約が作成されたときに、作成後のReservationを親に渡す
+  onCreate: (reservation: Reservation) => void;
+};
 
-  export default function ReservationForm() {
+  export default function ReservationForm({ onCreate }: ReservationFormProps) {
     const [successMessage, setSuccessMessage] = useState("");
-  
+
     const {
         register,
         handleSubmit,
@@ -49,12 +39,13 @@ const menuOptions: SelectOption[] = [
       });
 
       const onSubmit = (data: ReservationFormData) => {
-        console.log("送信データ", data);
-      
+        const newReservation = createReservation(data);
+        onCreate(newReservation);
+
         setSuccessMessage(
           "予約ありがとうございます。確認後ご連絡いたします。"
         );
-      
+
         reset();
       };
 
