@@ -1,5 +1,4 @@
 import type { Reservation } from "@/types/reservation";
-import type { ReservationFormData } from "@/app/lib/schemas/reservationSchema";
 import type { SelectOption } from "@/components/ui/SelectField";
 
 // 予約フォームで選べるメニュー一覧(value=保存用の値、label=画面表示用)。
@@ -11,7 +10,7 @@ export const menuOptions: SelectOption[] = [
 ];
 
 // menuのvalue(例: "extension")から、画面表示用のラベル(例: "まつげエクステ")に変換する
-function getMenuLabel(value: string): string {
+export function getMenuLabel(value: string): string {
   return menuOptions.find((option) => option.value === value)?.label ?? value;
 }
 
@@ -44,23 +43,26 @@ export function formatReservationDateTime(value: string): string {
   return `${year}/${month}/${day} ${hours}:${minutes}`;
 }
 
-export function createReservation(
-  data: ReservationFormData
-): Reservation {
-
- return {
-  id: crypto.randomUUID(),
-
-  customerName: data.name,
-
-  email: data.email,
-
-  datetime: new Date(data.datetime).toISOString(),
-
-  menu: getMenuLabel(data.menu),
-
-  status: "未確定",
-
-  memo: data.note ?? "",
+// Supabase reservationsテーブルのSELECT結果1行分の型(snake_case)
+export type ReservationRow = {
+  id: string;
+  customer_name: string;
+  email: string;
+  menu: string;
+  datetime: string;
+  status: Reservation["status"];
+  memo: string;
 };
+
+// DBの行データ(snake_case)を、既存のReservation型(camelCase)に変換する
+export function mapReservationRow(row: ReservationRow): Reservation {
+  return {
+    id: row.id,
+    customerName: row.customer_name,
+    email: row.email,
+    datetime: row.datetime,
+    menu: getMenuLabel(row.menu),
+    status: row.status,
+    memo: row.memo,
+  };
 }

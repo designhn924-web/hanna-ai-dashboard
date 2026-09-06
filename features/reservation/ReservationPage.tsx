@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReservationList from "./components/ReservationList";
 import ReservationDetail from "./components/ReservationDetail";
 import ReservationForm from "@/features/reservation/components/ReservationForm";
@@ -9,12 +9,25 @@ import type { Reservation } from "@/types/reservation";
 
 export default function ReservationPage() {
   // 予約一覧をstateで持つ(新規予約を追加できるように)
-  const [reservations, setReservations] = useState<Reservation[]>(() =>
-    getReservations(),
-  );
+  const [reservations, setReservations] = useState<Reservation[]>([]);
 
   // 今どの予約が選ばれているかをIDで管理する
-  const [selectedId, setSelectedId] = useState(reservations[0]?.id ?? "");
+  const [selectedId, setSelectedId] = useState("");
+
+  // マウント時にSupabaseから予約一覧を取得する
+  useEffect(() => {
+    let active = true;
+
+    getReservations().then((data) => {
+      if (!active) return;
+      setReservations(data);
+      setSelectedId((current) => current || (data[0]?.id ?? ""));
+    });
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   // 選ばれているIDから、対応する予約データを探す
   const selectedReservation = reservations.find(

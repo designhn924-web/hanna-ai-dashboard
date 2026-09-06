@@ -13,7 +13,8 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 
 import type { Reservation } from "@/types/reservation";
-import { createReservation, menuOptions } from "../reservationUtils";
+import { menuOptions } from "../reservationUtils";
+import { insertReservation } from "../data/reservations";
 
 type ReservationFormProps = {
   // 新規予約が作成されたときに、作成後のReservationを親に渡す
@@ -22,12 +23,13 @@ type ReservationFormProps = {
 
   export default function ReservationForm({ onCreate }: ReservationFormProps) {
     const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const {
         register,
         handleSubmit,
         reset,
-        formState: { errors },
+        formState: { errors, isSubmitting },
       } = useForm<ReservationFormData>({
         resolver: zodResolver(reservationSchema),
         defaultValues: {
@@ -39,15 +41,24 @@ type ReservationFormProps = {
         },
       });
 
-      const onSubmit = (data: ReservationFormData) => {
-        const newReservation = createReservation(data);
-        onCreate(newReservation);
+      const onSubmit = async (data: ReservationFormData) => {
+        setErrorMessage("");
 
-        setSuccessMessage(
-          "予約ありがとうございます。確認後ご連絡いたします。"
-        );
+        try {
+          const newReservation = await insertReservation(data);
+          onCreate(newReservation);
 
-        reset();
+          setSuccessMessage(
+            "予約ありがとうございます。確認後ご連絡いたします。"
+          );
+
+          reset();
+        } catch (error) {
+          console.error("予約の保存に失敗しました:", error);
+          setErrorMessage(
+            "予約の保存に失敗しました。時間をおいて再度お試しください。"
+          );
+        }
       };
 
       return (
@@ -56,6 +67,12 @@ type ReservationFormProps = {
           {successMessage && (
             <p>
               {successMessage}
+            </p>
+          )}
+
+          {errorMessage && (
+            <p>
+              {errorMessage}
             </p>
           )}
       <input
@@ -97,7 +114,7 @@ type ReservationFormProps = {
   placeholder="備考を入力してください"
 />
 
-      <button type="submit">予約する</button>
+      <button type="submit" disabled={isSubmitting}>予約する</button>
     </form>
   );
 }
