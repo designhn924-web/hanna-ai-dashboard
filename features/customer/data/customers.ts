@@ -1,52 +1,57 @@
+import { supabase } from "@/lib/supabase/client";
 import type { Customer } from "@/types/customer";
 
-// 顧客のダミーデータ(5件)
-const dummyCustomers: Customer[] = [
-  {
-    id: "1",
-    name: "田中 美咲",
-    phone: "090-1234-5678",
-    email: "misaki.tanaka@example.com",
-    memo: "頭皮が敏感。パッチテスト必須。",
-    createdAt: "2026/06/15",
-  },
-  {
-    id: "2",
-    name: "佐藤 陽子",
-    phone: "090-2345-6789",
-    email: "yoko.sato@example.com",
-    memo: "明るめのカラーを好む。",
-    createdAt: "2026/05/28",
-  },
-  {
-    id: "3",
-    name: "鈴木 花",
-    phone: "090-3456-7890",
-    email: "hana.suzuki@example.com",
-    memo: "次回はトリートメント希望。",
-    createdAt: "2026/07/02",
-  },
-  {
-    id: "4",
-    name: "高橋 健一",
-    phone: "090-4567-8901",
-    email: "kenichi.takahashi@example.com",
-    memo: "施術中は静かに過ごしたいタイプ。",
-    createdAt: "2026/07/10",
-  },
-  {
-    id: "5",
-    name: "伊藤 麻衣",
-    phone: "090-5678-9012",
-    email: "mai.ito@example.com",
-    memo: "香りの強いトリートメント剤はNG。",
-    createdAt: "2026/06/30",
-  },
-];
+// Supabase customersテーブルのSELECT結果1行分の型(snake_case、nullable列を含む)
+type CustomerRow = {
+  id: string;
+  name: string;
+  email: string | null;
+  phone: string | null;
+  memo: string | null;
+  created_at: string;
+};
 
-// 今はダミーデータを返しているだけだが、将来的にはSupabaseへの
-// fetch処理に置き換える想定。呼び出し側は同じ型のデータを受け取れるので、
-// 中身がどう変わっても影響を受けにくい。
-export function getCustomers(): Customer[] {
-  return dummyCustomers;
+// DBの登録日時(timestamptz)を、画面表示用の "YYYY/MM/DD" 形式に変換する
+function formatCreatedAt(value: string): string {
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}/${month}/${day}`;
+}
+
+// DBの行データ(snake_case、nullable含む)を既存のCustomer型へ変換する。
+// email/phone/memoはDBではnullableだが、Customer型は非nullのstringのままにしたいので
+// nullのときは空文字に変換する。
+function mapCustomerRow(row: CustomerRow): Customer {
+  return {
+    id: row.id,
+    name: row.name,
+    email: row.email ?? "",
+    phone: row.phone ?? "",
+    memo: row.memo ?? "",
+    createdAt: formatCreatedAt(row.created_at),
+  };
+}
+
+// Supabaseのcustomersテーブルから顧客一覧を取得する。
+// RLSによりauthenticatedのみ取得できる(SELECTポリシー: authenticated)。
+// 取得失敗時は呼び出し側(CustomerPage)でエラー表示できるよう、ここでは例外をthrowする。
+export async function getCustomers(): Promise<Customer[]> {
+  const { data, error } = await supabase
+    .from("customers")
+    .select("id, name, email, phone, memo, created_at")
+    .overrideTypes<CustomerRow[], { merge: false }>();
+
+  if (error) {
+    throw error;
+  }
+
+  return (data ?? []).map(mapCustomerRow);
 }
