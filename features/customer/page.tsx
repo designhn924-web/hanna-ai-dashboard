@@ -6,6 +6,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import Section from "@/components/ui/Section";
 import CustomerList from "./components/CustomerList";
 import CustomerDetail from "./components/CustomerDetail";
+import CustomerForm from "./components/CustomerForm";
 import { getCustomers } from "./data/customers";
 import type { Customer } from "@/types/customer";
 
@@ -52,6 +53,12 @@ export default function CustomerPage() {
     (customer) => customer.id === selectedId,
   );
 
+  // 新規顧客が登録されたら、一覧の末尾に追加し、その顧客を選択状態にする
+  const handleCreateCustomer = (newCustomer: Customer) => {
+    setCustomers((prev) => [...prev, newCustomer]);
+    setSelectedId(newCustomer.id);
+  };
+
   return (
     <FeatureLayout>
       <PageHeader
@@ -74,6 +81,12 @@ export default function CustomerPage() {
 
         <Section title="顧客カルテ">
           <CustomerDetail customer={selectedCustomer} />
+        </Section>
+      </div>
+
+      <div className="mt-8">
+        <Section title="新規顧客登録">
+          <CustomerForm onCreate={handleCreateCustomer} />
         </Section>
       </div>
     </FeatureLayout>

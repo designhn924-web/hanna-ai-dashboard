@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase/client";
 import type { Customer } from "@/types/customer";
+import type { CustomerFormData } from "@/app/lib/schemas/customerSchema";
 
 // Supabase customersテーブルのSELECT結果1行分の型(snake_case、nullable列を含む)
 type CustomerRow = {
@@ -54,4 +55,29 @@ export async function getCustomers(): Promise<Customer[]> {
   }
 
   return (data ?? []).map(mapCustomerRow);
+}
+
+// フォーム入力からSupabaseへ新規顧客をINSERTし、作成された行をCustomer型で返す。
+// id/created_atはDB側(default)に任せ、クライアントからは送信しない。
+// email/phone/memoが空欄の場合は、DBがnullableなためnullとして送る。
+export async function insertCustomer(
+  data: CustomerFormData,
+): Promise<Customer> {
+  const { data: row, error } = await supabase
+    .from("customers")
+    .insert({
+      name: data.name,
+      email: data.email || null,
+      phone: data.phone || null,
+      memo: data.memo || null,
+    })
+    .select("id, name, email, phone, memo, created_at")
+    .single()
+    .overrideTypes<CustomerRow, { merge: false }>();
+
+  if (error || !row) {
+    throw error ?? new Error("顧客の登録に失敗しました");
+  }
+
+  return mapCustomerRow(row);
 }
